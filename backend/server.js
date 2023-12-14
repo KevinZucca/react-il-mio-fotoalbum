@@ -5,6 +5,11 @@ const port = process.env.PORT;
 const cors = require("cors");
 const photosRouter = require("./routers/photos");
 const usersRouter = require("./routers/users");
+const categoriesRouter = require("./routers/categories");
+const messagesRouter = require("./routers/messages");
+const errorHandler = require("./middlewares/errorHandler");
+const notFoundRoute = require("./middlewares/notFoundRoute");
+const authRouter = require("./routers/auth");
 
 // body parser config
 app.use(express.json());
@@ -15,6 +20,13 @@ app.use(cors());
 // routes
 app.use("/photos", photosRouter);
 app.use("/users", usersRouter);
+app.use("/categories", categoriesRouter);
+app.use("", authRouter);
+app.use("/messages", messagesRouter);
+
+// middlewares
+app.use(notFoundRoute);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log(`server is running on port ${port} `);

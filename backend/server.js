@@ -4,7 +4,6 @@ const dotenv = require("dotenv").config();
 const port = process.env.PORT;
 const cors = require("cors");
 const photosRouter = require("./routers/photos");
-const usersRouter = require("./routers/users");
 const categoriesRouter = require("./routers/categories");
 const messagesRouter = require("./routers/messages");
 const errorHandler = require("./middlewares/errorHandler");
@@ -19,7 +18,6 @@ app.use(cors());
 
 // routes
 app.use("/photos", photosRouter);
-app.use("/users", usersRouter);
 app.use("/categories", categoriesRouter);
 app.use("", authRouter);
 app.use("/messages", messagesRouter);

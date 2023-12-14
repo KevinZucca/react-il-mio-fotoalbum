@@ -14,18 +14,13 @@ const paramID = {
  * @type {import("express-validator").Schema}
  */
 const bodyControl = {
-  title: {
+  name: {
     isString: {
-      errorMessage: "Title must be a string",
+      errorMessage: "The name must be a string",
     },
     isLength: {
-      errorMessage: "Title must have minimum 5 characters",
+      errorMessage: "The name must have minimum 5 characters",
       options: { min: 5 },
-    },
-  },
-  src: {
-    isString: {
-      errorMessage: "src must be a string",
     },
   },
 };

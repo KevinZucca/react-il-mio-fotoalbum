@@ -40,14 +40,11 @@ export default function Hero() {
         setActiveIndex(newIndex);
         setActiveImg(carouselImages[newIndex]);
       }
-      console.log("lunghezza del carosello: " + carouselImages.length);
-      console.log(activeIndex);
     } else if (direction == "right") {
       const newIndex =
         (activeIndex + 1 + carouselImages.length) % carouselImages.length;
       setActiveIndex(newIndex);
       setActiveImg(carouselImages[newIndex]);
-      console.log(activeIndex);
     }
   }
   //

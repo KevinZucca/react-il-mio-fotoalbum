@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { usePhotos } from "../contexts/PhotosContext";
 import { useState } from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function NavBar() {
   const { categoriesList, filterPhotos, searchPhoto } = usePhotos();
+  const [dropDown, setDropDown] = useState(false);
+  const { isLoggedIn, handleLogout, user, token } = useAuth();
   const [photoText, setPhotoText] = useState("");
 
   const pages = [
@@ -17,10 +20,15 @@ export default function NavBar() {
     setPhotoText(e);
   }
 
+  // functino to handle the searchbar
   function handleClick() {
     searchPhoto(photoText);
   }
 
+  // function to handle the account dropdown in navbar
+  function handleDropDown() {
+    setDropDown(!dropDown);
+  }
   return (
     <>
       <nav>
@@ -52,6 +60,41 @@ export default function NavBar() {
               <Link to={el.link}>{el.pageName}</Link>
             </li>
           ))}
+          <li className="relative">
+            {token ? (
+              <button onClick={handleDropDown}>Account</button>
+            ) : (
+              <Link to="/login">Login</Link>
+            )}
+            <div
+              className={`absolute ${
+                dropDown == true ? "block" : "hidden"
+              }  top-8 right-0 bg-white p-3 w-36 z-10 shadow-md`}
+            >
+              <ul className="flex flex-col gap-3">
+                <li>
+                  <Link onClick={() => handleDropDown()} to="/admin/photos">
+                    My collection
+                  </Link>
+                </li>
+                <li>
+                  <Link onClick={() => handleDropDown()} to="/admin/categories">
+                    Categories
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      handleDropDown();
+                      handleLogout();
+                    }}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </li>
         </ul>
         <ul className="flex justify-around items-center gap-7">
           <button onClick={() => filterPhotos("Tutte")}>Tutte</button>

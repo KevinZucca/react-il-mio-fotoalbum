@@ -4,7 +4,31 @@ const { kebabCase } = require("lodash");
 
 // get all the photos
 exports.index = async (req, res) => {
+  const { search, visible, categories } = req.query;
+  const photos = {};
+
+  if (search) {
+    photos.OR = [
+      { title: { contains: search } },
+      { description: { contains: search } },
+    ];
+  }
+
+  if (categories) {
+    const categoriesFilter = categories
+      .split(",")
+      .map((category) => parseInt(category));
+
+    photos.OR = [
+      ...(photos.OR || []),
+      { categories: { some: { id: { in: categoriesFilter } } } },
+    ];
+  }
+
+  photos.visible = true;
+
   const data = await prisma.photo.findMany({
+    where: photos,
     include: {
       categories: true,
       user: true,
@@ -18,6 +42,10 @@ exports.show = async (req, res) => {
   const data = await prisma.photo.findUnique({
     where: {
       id: Number(req.params.id),
+    },
+    include: {
+      categories: true,
+      user: true,
     },
   });
   return res.json(data);
@@ -36,14 +64,14 @@ exports.create = async (req, res) => {
       description: data.description,
       visible: data.visible,
       userId: data.userId,
-      // tags: {
-      //   connect: data.tags.map((tag) => ({ id: tag })),
-      // },
+      categories: {
+        connect: data.categories.map((category) => ({ id: category })),
+      },
     },
-    // include: {
-    //   tags: true,
-    //   image: true,
-    // },
+    include: {
+      categories: true,
+      user: true,
+    },
   });
   res.json(newPhoto);
 };
@@ -59,18 +87,17 @@ exports.update = async (req, res) => {
       description: data.description,
       visible: data.visible,
       userId: data.categoryId,
-      // tags: {
-      //   connect: data.tags.map((tagId) => ({ id: tagId })),
-      // },
+      categories: {
+        set: data.categories.map((categoryId) => ({ id: categoryId })),
+      },
     },
     where: {
       id: req.params.id,
     },
-    // include: {
-    //   category: true,
-    //   tags: true,
-    //   user: true,
-    // },
+    include: {
+      categories: true,
+      user: true,
+    },
   });
   res.json(updatePhoto);
 };

@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "title": "Laptop Ultrabook",
+        "description": "Potente laptop ultrabook con processore quad-core, 16 GB di RAM e SSD da 512 GB.",
+        "price": 1299.99,
+        "category": "Elettronica",
+        "brand": "TechGenius",
+        "image": "https://plus.unsplash.com/premium_photo-1680902988871-70d583ca1e95?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHx8"
+    },
+    {
+        "id": 2,
+        "title": "Smartphone Pro",
+        "description": "Ultimo modello di smartphone con fotocamera avanzata, display OLED e batteria a lunga durata.",
+        "price": 899.99,
+        "category": "Elettronica",
+        "brand": "MobileTech",
+        "image": "https://images.unsplash.com/photo-1701209770647-b7e4e25112ee?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 3,
+        "title": "Cuffie Wireless",
+        "description": "Cuffie wireless con cancellazione attiva del rumore e audio di alta qualità.",
+        "price": 149.99,
+        "category": "Audio",
+        "brand": "SoundWave",
+        "image": "https://plus.unsplash.com/premium_photo-1701200952191-d4f6d93be9d9?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 4,
+        "title": "Libro Bestseller",
+        "description": "Il romanzo più venduto del momento, avvincente e emozionante.",
+        "price": 24.99,
+        "category": "Libri",
+        "author": "John Doe",
+        "image": "https://images.unsplash.com/photo-1702012464674-a19c06793bc0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 5,
+        "title": "Fitness Tracker",
+        "description": "Fitness tracker con monitoraggio del battito cardiaco, contapassi e GPS integrato.",
+        "price": 79.99,
+        "category": "Fitness",
+        "brand": "FitTech",
+        "image": "https://plus.unsplash.com/premium_photo-1700676961688-dec6296de985?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwzMnx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 6,
+        "title": "Set di Pentole",
+        "description": "Set completo di pentole antiaderenti di alta qualità.",
+        "price": 129.99,
+        "category": "Cucina",
+        "brand": "ChefMaster",
+        "image": "https://images.unsplash.com/photo-1701770443637-69c62f98324f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyNHx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 7,
+        "title": "Maglione in Lana",
+        "description": "Maglione caldo e confortevole realizzato in pura lana.",
+        "price": 59.99,
+        "category": "Abbigliamento",
+        "brand": "FashionStyle",
+        "image": "https://images.unsplash.com/photo-1701932521067-ab10be5e9e2a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 8,
+        "title": "Videogioco di Avventura",
+        "description": "Videogioco di avventura con grafica straordinaria e trama coinvolgente.",
+        "price": 49.99,
+        "category": "Giochi",
+        "platform": "PlayStation 5",
+        "image": "https://plus.unsplash.com/premium_photo-1700765708700-9a736767e194?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw0MXx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 9,
+        "title": "Borsa da Viaggio",
+        "description": "Borsa da viaggio resistente e capiente con scomparti multipli.",
+        "price": 89.99,
+        "category": "Viaggi",
+        "brand": "TravelMate",
+        "image": "https://images.unsplash.com/photo-1682686578707-140b042e8f19?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw0NXx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 10,
+        "title": "Orologio Elegante",
+        "description": "Orologio elegante con cinturino in pelle e movimento al quarzo.",
+        "price": 129.99,
+        "category": "Orologi",
+        "brand": "TimeMaster",
+        "image": "https://images.unsplash.com/photo-1701921188059-daa354b6a91c?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1OHx8fGVufDB8fHx8fA%3D%3D"
+    }
+]

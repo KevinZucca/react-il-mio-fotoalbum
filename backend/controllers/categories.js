@@ -18,6 +18,9 @@ exports.show = async (req, res) => {
     where: {
       id: Number(req.params.id),
     },
+    include: {
+      photos: true,
+    },
   });
   return res.json(data);
 };
@@ -25,12 +28,15 @@ exports.show = async (req, res) => {
 // create a new category
 exports.create = async (req, res) => {
   const data = req.body;
-  data.slug = kebabCase(data.title);
+  data.slug = kebabCase(data.name);
 
   const newCategory = await prisma.category.create({
     data: {
-      name: data.title,
+      name: data.name,
       slug: data.slug,
+    },
+    include: {
+      photos: true,
     },
   });
   res.json(newCategory);
@@ -41,11 +47,14 @@ exports.update = async (req, res) => {
   const data = req.body;
   const updateCategory = await prisma.category.update({
     data: {
-      name: data.title,
+      name: data.name,
       slug: data.slug,
     },
     where: {
       id: req.params.id,
+    },
+    include: {
+      photos: true,
     },
   });
   res.json(updateCategory);

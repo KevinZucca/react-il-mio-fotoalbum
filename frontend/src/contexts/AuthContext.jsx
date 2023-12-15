@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
@@ -12,6 +12,7 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(
     () => localStorage.getItem("token") ?? null
   );
+  const [adminPhotos, setAdminPhotos] = useState([]);
 
   const navigate = useNavigate();
 
@@ -19,7 +20,6 @@ export function AuthProvider({ children }) {
     storeToken(payload.token);
     setIsLoggedIn(true);
     setUser(payload);
-    console.log(payload);
     setTimeout(() => {
       navigate("/admin/photos");
     });
@@ -47,6 +47,8 @@ export function AuthProvider({ children }) {
     handleLogin,
     handleLogout,
     setErrorMessage,
+    adminPhotos,
+    setAdminPhotos,
   };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;

@@ -77,6 +77,7 @@ exports.create = async (req, res) => {
 // edit a photo
 exports.update = async (req, res) => {
   const data = req.body;
+  data.slug = kebabCase(data.title);
   const updatePhoto = await prisma.photo.update({
     data: {
       title: data.title,
@@ -84,7 +85,7 @@ exports.update = async (req, res) => {
       src: data.src,
       description: data.description,
       visible: data.visible,
-      userId: data.categoryId,
+      userId: Number(data.userId),
       categories: {
         set: data.categories.map((categoryId) => ({ id: categoryId })),
       },

@@ -10,6 +10,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Dashboard from "./pages/admin/Dashboard";
 import AdminCategories from "./pages/admin/AdminCategories";
 import PrivateRoutes from "./middlewares/PrivateRoutes";
+import EditPhoto from "./pages/admin/EditPhoto";
 
 export default function App() {
   return (
@@ -37,6 +38,7 @@ export default function App() {
             >
               <Route index element={<Dashboard />} />
               <Route path="photos" element={<Dashboard />} />
+              <Route path="photos/:id" element={<EditPhoto />} />
               <Route path="categories" element={<AdminCategories />} />
             </Route>
           </Routes>

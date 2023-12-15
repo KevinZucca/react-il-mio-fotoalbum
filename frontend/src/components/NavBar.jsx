@@ -25,11 +25,13 @@ export default function NavBar() {
     <>
       <nav>
         <ul className="flex justify-between items-center p-3 gap-7">
-          <img
-            className="w-10"
-            src="https://www.svgrepo.com/show/513335/photo-camera.svg"
-            alt=""
-          />
+          <a href="/">
+            <img
+              className="w-10"
+              src="https://www.svgrepo.com/show/513335/photo-camera.svg"
+              alt=""
+            />
+          </a>
           <div id="search-container" className="h-full grow flex">
             <input
               type="search"

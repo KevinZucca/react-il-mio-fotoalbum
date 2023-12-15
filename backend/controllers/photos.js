@@ -1,6 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
-const { kebabCase } = require("lodash");
 
 // get all the photos
 exports.index = async (req, res) => {
@@ -49,65 +48,4 @@ exports.show = async (req, res) => {
     },
   });
   return res.json(data);
-};
-
-// create a new photo
-exports.create = async (req, res) => {
-  const data = req.body;
-  data.slug = kebabCase(data.title);
-
-  const newPhoto = await prisma.photo.create({
-    data: {
-      title: data.title,
-      slug: data.slug,
-      src: data.src,
-      description: data.description,
-      visible: data.visible,
-      userId: data.userId,
-      categories: {
-        connect: data.categories.map((category) => ({ id: category })),
-      },
-    },
-    include: {
-      categories: true,
-      user: true,
-    },
-  });
-  res.json(newPhoto);
-};
-
-// edit a photo
-exports.update = async (req, res) => {
-  const data = req.body;
-  const updatePhoto = await prisma.photo.update({
-    data: {
-      title: data.title,
-      slug: data.slug,
-      src: data.src,
-      description: data.description,
-      visible: data.visible,
-      userId: data.categoryId,
-      categories: {
-        set: data.categories.map((categoryId) => ({ id: categoryId })),
-      },
-    },
-    where: {
-      id: req.params.id,
-    },
-    include: {
-      categories: true,
-      user: true,
-    },
-  });
-  res.json(updatePhoto);
-};
-
-// delete a photo
-exports.destroy = async (req, res) => {
-  await prisma.photo.delete({
-    where: {
-      id: req.params.id,
-    },
-  });
-  res.json("photo deleted");
 };

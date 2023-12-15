@@ -21,7 +21,6 @@ export function PhotosProvider({ children }) {
 
   // // API TO FILTER THE PHOTOS LIST
   async function filterPhotos(categories) {
-    console.log(categories);
     if (categories == "Tutte") {
       getPhotos();
       return;
@@ -29,6 +28,19 @@ export function PhotosProvider({ children }) {
     try {
       const response = await fetch(
         `http://localhost:3000/photos?categories=${categories}`
+      );
+      const photos = await response.json();
+      setPhotosList(photos);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  // // API TO SEARCH A PHOTO
+  async function searchPhoto(text) {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/photos?search=${text}`
       );
       const photos = await response.json();
       setPhotosList(photos);
@@ -59,6 +71,7 @@ export function PhotosProvider({ children }) {
     categoriesList,
     setCategoriesList,
     filterPhotos,
+    searchPhoto,
   };
 
   return (

@@ -8,8 +8,10 @@ export default function PrivateRoutes({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn || !tokenIsValid) {
+    if (!isLoggedIn) {
       navigate("/login");
+    } else if (!tokenIsValid) {
+      navigate("/jwt-expired");
     }
   }, [isLoggedIn]);
 

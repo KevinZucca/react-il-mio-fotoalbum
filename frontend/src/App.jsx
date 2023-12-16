@@ -11,6 +11,7 @@ import Dashboard from "./pages/admin/Dashboard";
 import AdminCategories from "./pages/admin/AdminCategories";
 import PrivateRoutes from "./middlewares/PrivateRoutes";
 import EditPhoto from "./pages/admin/EditPhoto";
+import JWTExpired from "./pages/guest/JWTExpired";
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
             <Route element={<DefaultLayout />}>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/about" element={<About />}></Route>
+              <Route path="/jwt-expired" element={<JWTExpired />}></Route>
             </Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>

@@ -183,38 +183,47 @@ export default function EditPhoto() {
             </div>
 
             {/* PUBLISHED */}
-            <span className="mb-2">Do you wanto to make it public?</span>
-            <div className="mb-4 flex gap-5 justify-center">
-              <input
-                type="checkbox"
-                id="visible"
-                name="visible"
-                onChange={() =>
-                  setFormData((prevData) => ({
-                    ...prevData,
-                    visible: !prevData.visible,
-                  }))
-                }
-                checked={formData.visible}
-              />
-              <label htmlFor="visible"> Publish</label>
+            <div className="flex justify-center gap-3 items-center my-5">
+              <span>Do you wanto to make it public?</span>
+              <div>
+                <input
+                  type="checkbox"
+                  id="visible"
+                  name="visible"
+                  onChange={() =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      visible: !prevData.visible,
+                    }))
+                  }
+                  checked={formData.visible}
+                />
+              </div>
             </div>
 
             {/* CATEGORIES */}
-            <span className="mb-2">Categories</span>
-            {categories.map((el, index) => (
-              <div key={el.id} className="mb-4 flex gap-5 justify-center">
-                <input
-                  type="checkbox"
-                  id="true"
-                  name="categories"
-                  onChange={(e) => handleInput(el.id, "categories", "checkbox")}
-                  checked={formData.categories.includes(el.id)}
-                />
-                <label htmlFor="category"> {el.name}</label>
-              </div>
-            ))}
-            <div className="flex items-center justify-between">
+            <div className="border p-1">
+              <span className="text-xl">Categories</span>
+              {categories.map((el, index) => (
+                <div
+                  key={el.id}
+                  className="mb-4 grid grid-cols-2 gap-5 border p-1"
+                >
+                  <label htmlFor="category"> {el.name}</label>
+                  <input
+                    type="checkbox"
+                    id="true"
+                    name="categories"
+                    onChange={(e) =>
+                      handleInput(el.id, "categories", "checkbox")
+                    }
+                    checked={formData.categories.includes(el.id)}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-between mt-4">
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"

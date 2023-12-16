@@ -31,7 +31,7 @@ exports.login = async (req, res, next) => {
   });
 
   if (!user) {
-    return next(new AuthError("Impossibile trovare l'utente"));
+    return next(new AuthError("Impossible to find the user"));
   }
 
   const matchedPassword = await bcrypt.compare(
@@ -40,7 +40,7 @@ exports.login = async (req, res, next) => {
   );
 
   if (!matchedPassword) {
-    return next(new AuthError("La password è errata"));
+    return next(new AuthError("The password is not correct"));
   }
 
   const token = jsonwebtoken.sign(user, process.env.JWT_SECRET, {

@@ -124,7 +124,10 @@ export default function AdminCategories() {
                 Modify
               </button>
               <button
-                onClick={() => setEditMode(false)}
+                onClick={() => {
+                  setEditMode(false);
+                  setNewCategoryName("");
+                }}
                 className="px-4 py-2 bg-red-400 text-white rounded-md"
               >
                 Cancel
@@ -153,7 +156,10 @@ export default function AdminCategories() {
                 Create
               </button>
               <button
-                onClick={() => setCreateMode(false)}
+                onClick={() => {
+                  setNewCategoryName("");
+                  setCreateMode(false);
+                }}
                 className="px-4 py-2 bg-red-400 text-white rounded-md"
               >
                 Cancel

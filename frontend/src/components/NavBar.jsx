@@ -1,13 +1,10 @@
 import { Link } from "react-router-dom";
-import { usePhotos } from "../contexts/PhotosContext";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function NavBar() {
-  const { categoriesList, filterPhotos, searchPhoto } = usePhotos();
   const [dropDown, setDropDown] = useState(false);
-  const { isLoggedIn, handleLogout, user, token } = useAuth();
-  const [photoText, setPhotoText] = useState("");
+  const { handleLogout, token } = useAuth();
 
   const pages = [
     {
@@ -15,15 +12,6 @@ export default function NavBar() {
       pageName: "About",
     },
   ];
-
-  function handleInput(e) {
-    setPhotoText(e);
-  }
-
-  // functino to handle the searchbar
-  function handleClick() {
-    searchPhoto(photoText);
-  }
 
   // function to handle the account dropdown in navbar
   function handleDropDown() {
@@ -40,21 +28,6 @@ export default function NavBar() {
               alt=""
             />
           </a>
-          <div id="search-container" className="h-full grow flex">
-            <input
-              type="search"
-              placeholder="Search"
-              className="border p-1 h-full w-full"
-              value={photoText}
-              onChange={(e) => handleInput(e.target.value)}
-            />
-            <button
-              onClick={handleClick}
-              className="border h-full w-12 p-1 bg-black bg-opacity-80 rounded text-white "
-            >
-              Go
-            </button>
-          </div>
           {pages.map((el, index) => (
             <li key={index}>
               <Link to={el.link}>{el.pageName}</Link>
@@ -95,14 +68,6 @@ export default function NavBar() {
               </ul>
             </div>
           </li>
-        </ul>
-        <ul className="flex justify-around items-center gap-7">
-          <button onClick={() => filterPhotos("Tutte")}>Tutte</button>
-          {categoriesList.map((el, index) => (
-            <li key={el.id}>
-              <button onClick={() => filterPhotos(el.id)}>{el.name}</button>
-            </li>
-          ))}
         </ul>
       </nav>
     </>

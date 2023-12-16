@@ -1,11 +1,13 @@
 import Hero from "../../components/Hero";
 import { usePhotos } from "../../contexts/PhotosContext";
+import Filters from "../../components/Filters";
 
 export default function HomePage() {
   const { photosList } = usePhotos();
   return (
     <>
       <Hero />
+      <Filters />
       <div className="p-4 grid grid-cols-3 gap-4 justify-center w-full ">
         {photosList.map((el, index) => (
           <div

@@ -4,7 +4,7 @@ import { sendRequest } from "../../utils/FetchAPI";
 import { Link } from "react-router-dom";
 
 export default function Dashboard() {
-  const { adminPhotos, setAdminPhotos } = useAuth();
+  const { adminPhotos, setAdminPhotos, user } = useAuth();
   const [editPhoto, setEditPhoto] = useState(null);
 
   async function getPhotos() {
@@ -18,7 +18,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     getPhotos();
-  }, [adminPhotos]);
+  }, []);
   return (
     <>
       <h2 className="text-5xl my-4">Your Photos Collection</h2>

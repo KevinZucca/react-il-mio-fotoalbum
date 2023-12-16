@@ -4,7 +4,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { sendRequest } from "../utils/FetchAPI";
 
 export default function Login() {
-  const { handleLogin, errorMessage, setErrorMessage } = useAuth();
+  const { handleLogin, errorMessage, setErrorMessage, setUser } = useAuth();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -22,7 +22,6 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log(formData);
 
     try {
       const user = { ...formData };

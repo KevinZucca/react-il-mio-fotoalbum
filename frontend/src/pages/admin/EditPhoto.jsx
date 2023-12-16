@@ -4,19 +4,18 @@ import { useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function EditPhoto() {
+  const { user } = useAuth();
   const [photo, setPhoto] = useState("");
-  const [dataLoaded, setDataLoaded] = useState(false);
   const [categories, setCategories] = useState([]);
 
   const { id } = useParams();
-  const { user } = useAuth();
 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
     src: "",
     visible: "",
-    userId: user.id,
+    userId: "",
     categories: [],
   });
 
@@ -45,10 +44,21 @@ export default function EditPhoto() {
   function handleInput(value, field, type) {
     setFormData((currData) => {
       if (type == "checkbox") {
-        return {
-          ...currData,
-          [field]: !currData[field],
-        };
+        if (field == "categories") {
+          const updatedCategories = currData.categories.includes(value)
+            ? currData.categories.filter((id) => id != value)
+            : [...currData.categories, value];
+
+          return {
+            ...currData,
+            categories: updatedCategories,
+          };
+        } else {
+          return {
+            ...currData,
+            [field]: !currData[field],
+          };
+        }
       } else {
         return {
           ...currData,
@@ -73,23 +83,33 @@ export default function EditPhoto() {
   }
 
   useEffect(() => {
-    if (!dataLoaded) {
-      getSinglePhoto();
-      getAllCategories();
-      setDataLoaded(true);
+    const fetchData = async () => {
+      await getSinglePhoto();
+      await getAllCategories();
+    };
+
+    fetchData();
+  }, [id]);
+
+  useEffect(() => {
+    if (user) {
+      setFormData((prevData) => ({
+        ...prevData,
+        userId: user.id || "",
+      }));
     }
 
-    if (photo && id) {
-      setFormData({
+    if (photo) {
+      setFormData((prevData) => ({
+        ...prevData,
         title: photo.title || "",
         description: photo.description || "",
         src: photo.src || "",
-        visible: photo.visible || false,
-        userId: user.id || "",
-        categories: photo.categories || "",
-      });
+        visible: photo.visible,
+        categories: photo.categories || [],
+      }));
     }
-  }, [dataLoaded, photo, categories, id, user]);
+  }, [user, photo]);
 
   return (
     <>
@@ -167,22 +187,17 @@ export default function EditPhoto() {
             <div className="mb-4 flex gap-5 justify-center">
               <input
                 type="checkbox"
-                id="true"
+                id="visible"
                 name="visible"
-                onChange={(e) =>
-                  handleInput(!e.target.checked, "visible", "checkbox")
+                onChange={() =>
+                  setFormData((prevData) => ({
+                    ...prevData,
+                    visible: !prevData.visible,
+                  }))
                 }
+                checked={formData.visible}
               />
-              <label htmlFor="vehicle1"> Yes</label>
-              <input
-                type="checkbox"
-                id="false"
-                name="visible"
-                onChange={(e) =>
-                  handleInput(!e.target.checked, "visible", "checkbox")
-                }
-              />
-              <label htmlFor="vehicle1"> No</label>
+              <label htmlFor="visible"> Publish</label>
             </div>
 
             {/* CATEGORIES */}
@@ -192,10 +207,9 @@ export default function EditPhoto() {
                 <input
                   type="checkbox"
                   id="true"
-                  name="visible"
-                  onChange={(e) =>
-                    handleInput(!e.target.checked, "visible", "checkbox")
-                  }
+                  name="categories"
+                  onChange={(e) => handleInput(el.id, "categories", "checkbox")}
+                  checked={formData.categories.includes(el.id)}
                 />
                 <label htmlFor="category"> {el.name}</label>
               </div>

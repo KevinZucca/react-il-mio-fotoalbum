@@ -45,13 +45,14 @@ exports.create = async (req, res) => {
 // edit a category
 exports.update = async (req, res) => {
   const data = req.body;
+  data.slug = kebabCase(data.name);
   const updateCategory = await prisma.category.update({
     data: {
       name: data.name,
       slug: data.slug,
     },
     where: {
-      id: req.params.id,
+      id: Number(req.params.id),
     },
     include: {
       photos: true,
@@ -64,7 +65,7 @@ exports.update = async (req, res) => {
 exports.destroy = async (req, res) => {
   await prisma.category.delete({
     where: {
-      id: req.params.id,
+      id: Number(req.params.id),
     },
   });
   res.json("category deleted");

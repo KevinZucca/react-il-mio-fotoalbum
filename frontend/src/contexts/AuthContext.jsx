@@ -17,9 +17,10 @@ export function AuthProvider({ children }) {
   const navigate = useNavigate();
 
   function handleLogin(payload) {
+    console.log("Login payload:", payload);
     storeToken(payload.token);
     setIsLoggedIn(true);
-    setUser(payload);
+    setUser(payload.user);
     setTimeout(() => {
       navigate("/admin/photos");
     });
@@ -43,6 +44,7 @@ export function AuthProvider({ children }) {
   const values = {
     isLoggedIn,
     user,
+    setUser,
     token,
     handleLogin,
     handleLogout,

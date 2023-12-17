@@ -78,9 +78,8 @@ export default function AdminCategories() {
   }, [categoryEdited, categories]);
 
   return (
-    <div className="my-4 min-h-[75vh]">
+    <div className="my-4 min-h-[75vh] px-5">
       <h2 className="text-4xl my-5">Categories List</h2>
-      <hr className="my-4" />
 
       {/* DELETE MODAL */}
       {deleteMode && (

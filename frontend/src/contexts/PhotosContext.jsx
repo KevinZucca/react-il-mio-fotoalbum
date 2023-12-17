@@ -7,6 +7,8 @@ export function PhotosProvider({ children }) {
   const [photosList, setPhotosList] = useState([]);
   // CATEGORIES LIST STATE
   const [categoriesList, setCategoriesList] = useState([]);
+  // STATE FOR NOT FOUND RESULTS
+  const [notFound, setNotFound] = useState(false);
 
   // API TO GET THE PHOTOS LIST
   async function getPhotos() {
@@ -21,6 +23,7 @@ export function PhotosProvider({ children }) {
 
   // // API TO FILTER THE PHOTOS LIST
   async function filterPhotos(categories) {
+    setNotFound(false);
     if (categories == "Tutte") {
       getPhotos();
       return;
@@ -31,6 +34,9 @@ export function PhotosProvider({ children }) {
       );
       const photos = await response.json();
       setPhotosList(photos);
+      if (!photos.length > 0) {
+        setNotFound(true);
+      }
     } catch (err) {
       console.error(err);
     }
@@ -72,6 +78,7 @@ export function PhotosProvider({ children }) {
     setCategoriesList,
     filterPhotos,
     searchPhoto,
+    notFound,
   };
 
   return (

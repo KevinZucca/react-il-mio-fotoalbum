@@ -23,7 +23,7 @@ export default function About() {
     <>
       <animated.div style={about} className="grid grid-cols-2 relative">
         <div className="border-t pt-5 text-left p-3 flex flex-col">
-          <h2 className="text-8xl text-center">Me.</h2>
+          <h2 className="text-8xl text-center text-teal-500/75">Me.</h2>
           <div className="h-full flex place-items-center justify-center">
             <animated.div
               style={aboutDescription}

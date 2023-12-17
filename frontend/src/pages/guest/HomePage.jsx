@@ -8,13 +8,17 @@ export default function HomePage() {
     <>
       <Hero />
       <Filters />
-      <div className="p-4 grid grid-cols-3 gap-4 justify-center w-full ">
+      <div
+        id="photo-card"
+        className="p-4 grid grid-cols-3 gap-4 justify-center w-full"
+      >
         {photosList.map((el, index) => (
           <div
+            id="photo"
             key={index}
             className={`border p-4 h-[400px] bg-cover bg-center relative ${
               index == 3 || index == 6 ? "col-span-2" : ""
-            }`}
+            } `}
             style={{
               backgroundImage: `url('${el.src}')`,
             }}

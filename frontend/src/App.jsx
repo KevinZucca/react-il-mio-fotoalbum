@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import DefaultLayout from "./layouts/DefaultLayout";
+import AdminLayout from "./layouts/AdminLayout";
 import HomePage from "./pages/guest/HomePage";
 import About from "./pages/guest/About";
 import { PhotosProvider } from "./contexts/PhotosContext";
@@ -23,19 +24,19 @@ export default function App() {
             <Route element={<DefaultLayout />}>
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/about" element={<About />}></Route>
-              <Route path="/jwt-expired" element={<JWTExpired />}></Route>
             </Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/register" element={<Register />}></Route>
+            <Route path="/jwt-expired" element={<JWTExpired />}></Route>
 
             {/* private routes */}
 
             <Route
               path="/admin/*"
               element={
-                <DefaultLayout>
+                <AdminLayout>
                   <PrivateRoutes />
-                </DefaultLayout>
+                </AdminLayout>
               }
             >
               <Route index element={<Dashboard />} />

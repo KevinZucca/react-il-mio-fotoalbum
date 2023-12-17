@@ -49,7 +49,7 @@ export default function Dashboard() {
   return (
     <>
       <h2 className="text-5xl my-4">Your Photos Collection</h2>
-      <div className="p-4 grid grid-cols-5 gap-4 justify-center w-full">
+      <div className="p-4 grid grid-cols-5 gap-4 justify-center w-full min-h-[100vh]">
         {adminPhotos.map((el, index) => (
           <div
             onMouseOver={() => setEditPhoto(index)}
@@ -83,7 +83,7 @@ export default function Dashboard() {
       </div>
 
       {/* ADD NEW PHOTO BUTTON */}
-      <div className="m-auto my-4">
+      <div className="m-auto my-4 fixed right-4 bottom-4">
         <button
           onClick={() => {
             setCreateMode(true);
@@ -95,7 +95,7 @@ export default function Dashboard() {
               categories: [],
             });
           }}
-          className="rounded-full bg-cyan-700 text-white text-3xl w-14 h-14 hover:scale-125 hover:shadow-md transition-all"
+          className="rounded-full z-20 bg-cyan-700 text-white text-3xl w-24 h-24 hover:scale-125 hover:shadow-md transition-all"
           disabled={createMode}
         >
           +

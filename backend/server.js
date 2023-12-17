@@ -11,6 +11,7 @@ const notFoundRoute = require("./middlewares/notFoundRoute");
 const authRouter = require("./routers/auth");
 const adminPhotosRouter = require("./routers/admin/photos");
 const adminCategoriesRouter = require("./routers/admin/categories");
+const usersRouter = require("./routers/users");
 
 // body parser config
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use(cors());
 app.use("/photos", photosRouter);
 app.use("/categories", categoriesRouter);
 app.use("/messages", messagesRouter);
+app.use("/users", usersRouter);
 
 // ADMIN routes
 app.use("/admin/photos", adminPhotosRouter);

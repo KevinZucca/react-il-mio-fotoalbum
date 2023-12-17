@@ -25,12 +25,12 @@ exports.show = async (req, res) => {
 // create a new message
 exports.create = async (req, res) => {
   const data = req.body;
-  data.slug = kebabCase(data.title);
 
   const newMessage = await prisma.message.create({
     data: {
-      name: data.title,
-      slug: data.slug,
+      title: data.title,
+      content: data.content,
+      userId: Number(data.userId),
     },
   });
   res.json(newMessage);
@@ -45,7 +45,7 @@ exports.update = async (req, res) => {
       slug: data.slug,
     },
     where: {
-      id: req.params.id,
+      id: Number(req.params.id),
     },
   });
   res.json(updateMessage);
@@ -55,7 +55,7 @@ exports.update = async (req, res) => {
 exports.destroy = async (req, res) => {
   await prisma.message.delete({
     where: {
-      id: req.params.id,
+      id: Number(req.params.id),
     },
   });
   res.json("message deleted");

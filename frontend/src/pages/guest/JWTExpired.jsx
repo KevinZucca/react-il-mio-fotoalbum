@@ -1,6 +1,9 @@
+import NavBar from "../../components/Navbar";
+
 export default function JWTExpired() {
   return (
     <>
+      <NavBar />
       <h1 className="text-3xl">
         Sorry, your JWT is expired, You need to login
       </h1>

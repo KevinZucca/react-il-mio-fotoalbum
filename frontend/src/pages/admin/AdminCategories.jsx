@@ -78,7 +78,7 @@ export default function AdminCategories() {
   }, [categoryEdited, categories]);
 
   return (
-    <div className="my-4">
+    <div className="my-4 min-h-[75vh]">
       <h2 className="text-4xl my-5">Categories List</h2>
       <hr className="my-4" />
 

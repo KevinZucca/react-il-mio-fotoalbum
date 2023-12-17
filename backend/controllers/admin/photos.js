@@ -61,7 +61,7 @@ exports.create = async (req, res) => {
       src: data.src,
       description: data.description,
       visible: data.visible,
-      userId: data.userId,
+      userId: Number(data.userId) || null,
       categories: {
         connect: data.categories.map((category) => ({ id: category })),
       },
@@ -92,7 +92,7 @@ exports.update = async (req, res) => {
       },
     },
     where: {
-      id: req.params.id,
+      id: Number(req.params.id),
     },
     include: {
       categories: true,

@@ -2,10 +2,20 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { sendRequest } from "../../utils/FetchAPI";
 import { Link } from "react-router-dom";
+import CreatePhotoModal from "../../components/CreateModal";
 
 export default function Dashboard() {
   const { adminPhotos, setAdminPhotos, user } = useAuth();
   const [editPhoto, setEditPhoto] = useState(null);
+
+  const [createMode, setCreateMode] = useState(false);
+  const [newPhotoData, setNewPhotoData] = useState({
+    title: "",
+    description: "",
+    src: "",
+    visible: false,
+    categories: [],
+  });
 
   async function getPhotos() {
     try {
@@ -15,6 +25,23 @@ export default function Dashboard() {
       console.log(error);
     }
   }
+
+  const handleCreatePhoto = async (newPhotoData) => {
+    try {
+      await sendRequest("/admin/photos", "POST", newPhotoData);
+      setNewPhotoData({
+        title: "",
+        description: "",
+        src: "",
+        visible: false,
+        categories: [],
+      });
+      getPhotos();
+      setCreateMode(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     getPhotos();
@@ -54,6 +81,32 @@ export default function Dashboard() {
           </div>
         ))}
       </div>
+
+      {/* ADD NEW PHOTO BUTTON */}
+      <div className="m-auto my-4">
+        <button
+          onClick={() => {
+            setCreateMode(true);
+            setNewPhotoData({
+              title: "",
+              description: "",
+              src: "",
+              visible: false,
+              categories: [],
+            });
+          }}
+          className="rounded-full bg-cyan-700 text-white text-3xl w-14 h-14 hover:scale-125 hover:shadow-md transition-all"
+          disabled={createMode}
+        >
+          +
+        </button>
+      </div>
+
+      <CreatePhotoModal
+        isOpen={createMode}
+        onClose={() => setCreateMode(false)}
+        onCreate={handleCreatePhoto}
+      />
     </>
   );
 }

@@ -48,7 +48,7 @@ export default function Dashboard() {
   }, []);
   return (
     <>
-      <h2 className="text-5xl my-4">Your Photos Collection</h2>
+      <h2 className="text-5xl text-gray-700/75 my-4">Your Photos Collection</h2>
       <div className="p-4 grid grid-cols-5 gap-4 justify-center w-full min-h-[100vh]">
         {adminPhotos.map((el, index) => (
           <div

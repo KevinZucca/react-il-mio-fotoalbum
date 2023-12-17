@@ -19,7 +19,7 @@ export default function Filters() {
   return (
     <>
       <nav>
-        <p className="my-3 mt-10 text-center text-2xl">
+        <p className="my-3 mt-10 text-center text-2xl text-gray-800/75">
           Search from an expansive collection from title or description of the
           picture
         </p>

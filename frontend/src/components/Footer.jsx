@@ -104,12 +104,12 @@ export default function Footer() {
               <div className="col-span-2">
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900">
-                    Do you want to contact one of our photographer?
+                    Do you want to contact me?
                   </h2>
 
                   <p className="mt-4 text-gray-600">
-                    Just let him/her a message, you will receive an answer as
-                    soon as possible
+                    Just let me a message, you will receive an answer as soon as
+                    possible
                   </p>
                 </div>
               </div>

@@ -163,7 +163,7 @@ export default function CreatePhotoModal({ isOpen, onClose, onCreate }) {
               <div className="flex justify-center my-4">
                 <button
                   type="submit"
-                  className="mr-2 px-4 py-2 bg-green-400 text-white rounded-md"
+                  className="mr-2 px-4 py-2 bg-teal-500/75 text-white rounded-md"
                 >
                   Create
                 </button>

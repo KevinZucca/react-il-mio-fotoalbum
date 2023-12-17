@@ -138,7 +138,7 @@ export default function EditPhoto() {
             <div className="flex justify-end">
               <button
                 onClick={() => handleDelete(id)}
-                className="mr-2 px-4 py-2 bg-green-400 text-white rounded-md"
+                className="mr-2 px-4 py-2 bg-teal-500/75 text-white rounded-md"
               >
                 Continue
               </button>
@@ -153,7 +153,7 @@ export default function EditPhoto() {
         </div>
       )}
 
-      <h2 className="text-4xl">{photo.title}</h2>
+      <h2 className="text-4xl text-gray-800/75 ">{photo.title}</h2>
       <div className="grid grid-cols-2 mt-8 min-h-[50vh]">
         <div
           className="border p-4 h-full bg-cover bg-center relative"
@@ -266,7 +266,7 @@ export default function EditPhoto() {
             {/* SAVE EDITINGS BUTTON */}
             <div className="flex items-center justify-center mt-4">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-teal-500/75 hover:bg-teal-700/75 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
               >
                 Save editings

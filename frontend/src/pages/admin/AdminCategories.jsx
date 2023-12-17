@@ -79,7 +79,7 @@ export default function AdminCategories() {
 
   return (
     <div className="my-4 min-h-[75vh] px-5">
-      <h2 className="text-4xl my-5">Categories List</h2>
+      <h2 className="text-4xl my-5 text-gray-700/75">Categories List</h2>
 
       {/* DELETE MODAL */}
       {deleteMode && (
@@ -89,7 +89,7 @@ export default function AdminCategories() {
             <div className="flex justify-end">
               <button
                 onClick={() => handleDelete(categoryDeleted)}
-                className="mr-2 px-4 py-2 bg-green-400 text-white rounded-md"
+                className="mr-2 px-4 py-2 bg-teal-500/75  text-white rounded-md"
               >
                 Continue
               </button>
@@ -118,7 +118,7 @@ export default function AdminCategories() {
             <div className="flex justify-end">
               <button
                 onClick={() => handleEdit()}
-                className="mr-2 px-4 py-2 bg-green-400 text-white rounded-md"
+                className="mr-2 px-4 py-2 bg-teal-500/75 text-white rounded-md"
               >
                 Modify
               </button>
@@ -150,7 +150,7 @@ export default function AdminCategories() {
             <div className="flex justify-end">
               <button
                 onClick={() => handleCreate()}
-                className="mr-2 px-4 py-2 bg-green-400 text-white rounded-md"
+                className="mr-2 px-4 py-2 bg-teal-500/75 text-white rounded-md"
               >
                 Create
               </button>
@@ -178,7 +178,7 @@ export default function AdminCategories() {
                 setEditMode(true);
                 setCategoryEdited(el.id);
               }}
-              className="border w-[100px] hover:shadow-md text-white bg-green-400"
+              className="border w-[100px] hover:shadow-md text-white bg-teal-500/75 "
             >
               Edit Name
             </button>

@@ -19,7 +19,7 @@ export default function NavBar() {
   }
   return (
     <>
-      <nav>
+      <nav className="border-b">
         <ul className="flex justify-between items-center p-3 gap-7">
           <a href="/">
             <img
@@ -33,7 +33,7 @@ export default function NavBar() {
               <Link to={el.link}>{el.pageName}</Link>
             </li>
           ))}
-          <li className="relative">
+          <li className="relative ">
             {token ? (
               <button onClick={handleDropDown}>Account</button>
             ) : (

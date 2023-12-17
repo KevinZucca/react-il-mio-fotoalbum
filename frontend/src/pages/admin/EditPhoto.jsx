@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
 import { sendRequest } from "../../utils/FetchAPI";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function EditPhoto() {
-  const { user } = useAuth();
+  const { userId } = useAuth();
   const [photo, setPhoto] = useState("");
   const [categories, setCategories] = useState([]);
 
+  const [photoDeleted, setPhotoDeleted] = useState("");
+  const [deleteMode, setDeleteMode] = useState(false);
+
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     title: "",
@@ -82,23 +86,35 @@ export default function EditPhoto() {
     }
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
+  // function to delete a photo
+  async function handleDelete(id) {
+    try {
+      await sendRequest(`/admin/photos/${id}`, "DELETE");
+      setDeleteMode(false);
+      setTimeout(() => {
+        navigate("/admin/photos");
+      }, 2000);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchData() {
+    console.log("UserId in fetchData:", userId);
+
+    try {
       await getSinglePhoto();
       await getAllCategories();
-    };
-
-    fetchData();
-  }, [id]);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
-    if (user) {
-      setFormData((prevData) => ({
-        ...prevData,
-        userId: user.id || "",
-      }));
-    }
+    fetchData();
+  }, [id, userId]);
 
+  useEffect(() => {
     if (photo) {
       setFormData((prevData) => ({
         ...prevData,
@@ -106,13 +122,37 @@ export default function EditPhoto() {
         description: photo.description || "",
         src: photo.src || "",
         visible: photo.visible,
+        userId: userId,
         categories: photo.categories || [],
       }));
     }
-  }, [user, photo]);
+  }, [photo]);
 
   return (
     <>
+      {/* DELETE MODAL */}
+      {deleteMode && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-20">
+          <div className="bg-white p-6 rounded-md">
+            <p className="mb-4">Do you really want to delete the element?</p>
+            <div className="flex justify-end">
+              <button
+                onClick={() => handleDelete(photoDeleted)}
+                className="mr-2 px-4 py-2 bg-green-400 text-white rounded-md"
+              >
+                Continue
+              </button>
+              <button
+                onClick={() => setDeleteMode(false)}
+                className="px-4 py-2 bg-red-400 text-white rounded-md"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <h2 className="text-4xl">{photo.title}</h2>
       <div className="grid grid-cols-2 mt-8 min-h-[50vh]">
         <div
@@ -229,6 +269,15 @@ export default function EditPhoto() {
                 type="submit"
               >
                 Save editings
+              </button>
+              <button
+                onClick={() => {
+                  setDeleteMode(true);
+                  setPhotoDeleted(id);
+                }}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              >
+                Delete Photo
               </button>
             </div>
           </form>

@@ -4,7 +4,7 @@ const jsonwebtoken = require("jsonwebtoken");
 module.exports = function (req, res, next) {
   const bearer = req.headers.authorization;
   if (!bearer || !bearer.startsWith("Bearer ")) {
-    throw new AuthError("Bearer token mancante o malformato");
+    throw new AuthError("Missing the Bearer token");
   }
   const token = bearer.split(" ")[1];
   const user = jsonwebtoken.verify(token, process.env.JWT_SECRET);

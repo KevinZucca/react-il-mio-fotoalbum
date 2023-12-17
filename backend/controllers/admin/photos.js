@@ -78,6 +78,7 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   const data = req.body;
   data.slug = kebabCase(data.title);
+
   const updatePhoto = await prisma.photo.update({
     data: {
       title: data.title,
@@ -105,7 +106,7 @@ exports.update = async (req, res) => {
 exports.destroy = async (req, res) => {
   await prisma.photo.delete({
     where: {
-      id: req.params.id,
+      id: Number(req.params.id),
     },
   });
   res.json("photo deleted");

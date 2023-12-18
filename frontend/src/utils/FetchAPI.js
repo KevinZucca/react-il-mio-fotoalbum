@@ -15,10 +15,10 @@ const sendRequest = async (url, method = "GET", body = null) => {
   const expirationDate = token ? getExpirationDate(token) : null;
 
   // control to check if the token is expired
-  if (expirationDate && expirationDate < new Date()) {
-    window.location.href = `/jwt-expired`;
-    return;
-  }
+  // if (expirationDate && expirationDate < new Date()) {
+  //   window.location.href = `/jwt-expired`;
+  //   return;
+  // }
 
   const options = {
     method,

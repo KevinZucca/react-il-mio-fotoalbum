@@ -4,16 +4,16 @@ import { useEffect } from "react";
 
 export default function PrivateRoutes({ children }) {
   const { isLoggedIn } = useAuth();
-  const { tokenIsValid } = useAuth();
+  const { token } = useAuth();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (!isLoggedIn && !token) {
       navigate("/login");
-    } else if (!tokenIsValid) {
+    } else if (!token) {
       navigate("/jwt-expired");
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, token]);
 
   return <>{isLoggedIn && children}</>;
 }

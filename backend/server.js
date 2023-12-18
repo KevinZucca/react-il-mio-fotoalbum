@@ -16,6 +16,9 @@ const usersRouter = require("./routers/users");
 // body parser config
 app.use(express.json());
 
+// static files
+// app.use("/uploads", express.static("uploads"));
+
 // cors
 app.use(cors());
 

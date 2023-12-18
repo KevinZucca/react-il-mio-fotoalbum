@@ -35,6 +35,7 @@ export default function HomePage() {
             <div className=" text-gray-200 absolute bottom-5 right-2 p-2 w-full">
               <h3 className="text-3xl">{el.title}</h3>
               <p>{el.description}</p>
+              <em>by - {el.user?.username ?? "No username"} - </em>
             </div>
           </div>
         ))}

@@ -4,29 +4,10 @@ const { kebabCase } = require("lodash");
 
 // get all the photos
 exports.index = async (req, res) => {
-  const { search, categories } = req.query;
-  const photos = {};
-
-  if (search) {
-    photos.OR = [
-      { title: { contains: search } },
-      { description: { contains: search } },
-    ];
-  }
-
-  if (categories) {
-    const categoriesFilter = categories
-      .split(",")
-      .map((category) => parseInt(category));
-
-    photos.OR = [
-      ...(photos.OR || []),
-      { categories: { some: { id: { in: categoriesFilter } } } },
-    ];
-  }
-
   const data = await prisma.photo.findMany({
-    where: photos,
+    where: {
+      userId: req.user.id,
+    },
     include: {
       categories: true,
       user: true,

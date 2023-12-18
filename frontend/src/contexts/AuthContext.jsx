@@ -20,17 +20,12 @@ export function AuthProvider({ children }) {
   function handleLogin(payload) {
     storeToken(payload.token);
     setIsLoggedIn(true);
-    setUser(payload);
+    setUser(payload.user);
+    // setUserId(payload.user.id);
     setTimeout(() => {
       navigate("/admin/photos");
     });
   }
-
-  useEffect(() => {
-    if (user && user.user && user.user.id) {
-      setUserId(user.user.id);
-    }
-  }, [handleLogin]);
 
   function handleLogout() {
     setIsLoggedIn(false);

@@ -4,6 +4,7 @@ import Filters from "../../components/Filters";
 
 export default function HomePage() {
   const { photosList } = usePhotos();
+
   return (
     <>
       <Hero />
@@ -12,7 +13,7 @@ export default function HomePage() {
         id="photo-card"
         className="p-4 grid grid-cols-3 gap-4 justify-center w-full"
       >
-        {photosList.map((el, index) => (
+        {photosList?.map((el, index) => (
           <div
             id="photo"
             key={index}
@@ -23,6 +24,13 @@ export default function HomePage() {
               backgroundImage: `url('${el.src}')`,
             }}
           >
+            {/* {el.categories.length > 0 && (
+              <ul className="absolute top-3 left-3  text-gray-700 font-bold bg-white/70 p-2">
+                {el.categories.map((category, index) => (
+                  <li key={category.id}>{category.name}</li>
+                ))}
+              </ul>
+            )} */}
             <div className="overlay absolute top-0 left-0 w-full h-full bg-black opacity-10"></div>
             <div className=" text-gray-200 absolute bottom-5 right-2 p-2 w-full">
               <h3 className="text-3xl">{el.title}</h3>

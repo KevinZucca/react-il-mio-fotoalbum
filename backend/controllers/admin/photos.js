@@ -61,7 +61,7 @@ exports.create = async (req, res) => {
       src: data.src,
       description: data.description,
       visible: data.visible,
-      userId: Number(data.userId) || null,
+      userId: req.user.id,
       categories: {
         connect: data.categories.map((category) => ({ id: category })),
       },
@@ -78,7 +78,7 @@ exports.create = async (req, res) => {
 exports.update = async (req, res) => {
   const data = req.body;
   data.slug = kebabCase(data.title);
-
+  console.log(data.categories);
   const updatePhoto = await prisma.photo.update({
     data: {
       title: data.title,
@@ -86,9 +86,9 @@ exports.update = async (req, res) => {
       src: data.src,
       description: data.description,
       visible: data.visible,
-      userId: Number(data.userId),
+      userId: req.user.id,
       categories: {
-        set: data.categories.map((categoryId) => ({ id: categoryId })),
+        set: data.categories.map((category) => ({ id: category })),
       },
     },
     where: {

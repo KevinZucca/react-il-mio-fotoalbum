@@ -37,8 +37,14 @@ const sendRequest = async (url, method = "GET", body = null) => {
 
   const response = await fetch(`${baseURL}${url}`, options);
   const responseData = await response.json();
+  const errorsArray = responseData.errors;
+
+  if (errorsArray && errorsArray.length > 0) {
+    const errorMessage = errorsArray.map((error) => error.msg).join(", ");
+    throw new Error(errorMessage);
+  }
   if (!response.ok) {
-    throw new Error(responseData.error || "There is an error");
+    throw new Error("There is an error");
   }
 
   return responseData;

@@ -4,11 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
 export default function EditPhoto() {
-  const { userId } = useAuth();
+  const { user } = useAuth();
   const [photo, setPhoto] = useState("");
   const [categories, setCategories] = useState([]);
-
   const [deleteMode, setDeleteMode] = useState(false);
+  const [alert, setAlert] = useState({ type: "", message: "" });
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,7 +18,6 @@ export default function EditPhoto() {
     description: "",
     src: "",
     visible: "",
-    userId: "",
     categories: [],
   });
 
@@ -49,9 +48,10 @@ export default function EditPhoto() {
       if (type == "checkbox") {
         if (field == "categories") {
           const updatedCategories = currData.categories.includes(value)
-            ? currData.categories.filter((id) => id != value)
+            ? currData.categories.filter((categoryId) => categoryId != value)
             : [...currData.categories, value];
 
+          console.log(currData);
           return {
             ...currData,
             categories: updatedCategories,
@@ -80,9 +80,23 @@ export default function EditPhoto() {
         formData
       );
       setPhoto(response);
+      console.log("photo correctly updated!");
+      setAlert({ type: "success", message: "Photo updated!" });
     } catch (error) {
       console.log(error);
+      setAlert({
+        type: "fail",
+        message: "Impossible to update the photo. Check the fields",
+      });
     }
+
+    const timeoutId = setTimeout(() => {
+      setAlert({ type: "", message: "" });
+    }, 4000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }
 
   // function to delete a photo
@@ -100,8 +114,6 @@ export default function EditPhoto() {
   }
 
   async function fetchData() {
-    console.log("UserId in fetchData:", userId);
-
     try {
       await getSinglePhoto();
       await getAllCategories();
@@ -112,7 +124,7 @@ export default function EditPhoto() {
 
   useEffect(() => {
     fetchData();
-  }, [id, userId]);
+  }, [id]);
 
   useEffect(() => {
     if (photo) {
@@ -122,8 +134,7 @@ export default function EditPhoto() {
         description: photo.description || "",
         src: photo.src || "",
         visible: photo.visible,
-        userId: userId,
-        categories: photo.categories || [],
+        categories: photo.categories?.map((el) => el.id) || [],
       }));
     }
   }, [photo]);
@@ -154,6 +165,28 @@ export default function EditPhoto() {
       )}
 
       <h2 className="text-4xl text-gray-800/75 ">{photo.title}</h2>
+
+      {/* MESSAGE ALERT */}
+      <div className="pt-5 relative">
+        {alert.type == "success" && (
+          <p
+            className={`bg-green-400 w-[200px] m-auto p-2 text-white/75 rounded-md shadow-xl fixed top-20 left-5 ${
+              alert.type == "" ? "hidden" : "block"
+            }`}
+          >
+            {alert.message}
+          </p>
+        )}{" "}
+        {alert.type == "fail" && (
+          <p
+            className={`bg-red-400 w-[200px] m-auto p-2 text-white/75 rounded-md shadow-xl fixed top-20 left-5 ${
+              alert.type == "" ? "hidden" : "block"
+            }`}
+          >
+            {alert.message}
+          </p>
+        )}
+      </div>
       <div className="grid grid-cols-2 mt-8 min-h-[50vh]">
         <div
           className="border p-4 h-full bg-cover bg-center relative"

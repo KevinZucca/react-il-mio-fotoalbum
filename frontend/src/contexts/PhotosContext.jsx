@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { sendRequest } from "../utils/FetchAPI";
 
 const PhotosContext = createContext();
 
@@ -13,8 +14,8 @@ export function PhotosProvider({ children }) {
   // API TO GET THE PHOTOS LIST
   async function getPhotos() {
     try {
-      const response = await fetch("http://localhost:3000/photos");
-      const photos = await response.json();
+      const response = await sendRequest("/photos", "GET");
+      const photos = await response;
       setPhotosList(photos);
     } catch (err) {
       console.error(err);
@@ -29,10 +30,11 @@ export function PhotosProvider({ children }) {
       return;
     }
     try {
-      const response = await fetch(
-        `http://localhost:3000/photos?categories=${categories}`
+      const response = await sendRequest(
+        `/photos?categories=${categories}`,
+        "GET"
       );
-      const photos = await response.json();
+      const photos = await response;
       setPhotosList(photos);
       if (!photos.length > 0) {
         setNotFound(true);
@@ -45,10 +47,8 @@ export function PhotosProvider({ children }) {
   // // API TO SEARCH A PHOTO
   async function searchPhoto(text) {
     try {
-      const response = await fetch(
-        `http://localhost:3000/photos?search=${text}`
-      );
-      const photos = await response.json();
+      const response = await sendRequest(`/photos?search=${text}`, "GET");
+      const photos = await response;
       setPhotosList(photos);
     } catch (err) {
       console.error(err);
@@ -58,8 +58,8 @@ export function PhotosProvider({ children }) {
   // API TO GET THE CATEGORIES LIST
   async function getCategories() {
     try {
-      const response = await fetch("http://localhost:3000/categories");
-      const categories = await response.json();
+      const response = await sendRequest("/categories", "GET");
+      const categories = await response;
       setCategoriesList(categories);
     } catch (err) {
       console.error(err);

@@ -4,8 +4,9 @@ import { useAuth } from "../contexts/AuthContext";
 import { sendRequest } from "../utils/FetchAPI";
 
 export default function Login() {
-  const { handleLogin, errorMessage, setErrorMessage, setUser } = useAuth();
+  const { handleLogin, setUser } = useAuth();
   const navigate = useNavigate();
+  const [errors, setErrors] = useState([]);
 
   const [formData, setFormData] = useState({
     username: "",
@@ -28,9 +29,17 @@ export default function Login() {
       const response = await sendRequest("/login", "POST", user);
       handleLogin(response);
       navigate("/admin/photos");
-    } catch (error) {
-      console.log(error);
-      setErrorMessage(error.message);
+    } catch (err) {
+      if (err instanceof Error) {
+        //if err is an instance of Error, setErrors with this
+        setErrors([err.message]);
+      } else if (err.errors && Array.isArray(err.errors)) {
+        // If err has an error propriety and is an array, set that
+        setErrors(err.errors.map((error) => error.msg));
+      } else {
+        // otherwhise
+        setErrors(["An unexpected error occurred"]);
+      }
     }
   }
 
@@ -38,13 +47,17 @@ export default function Login() {
     // ERROR MESSAGE
     <div className="flex flex-col w-full justify-center items-center gap-4 py-5">
       <h2 className="text-4xl pt-5">Login page</h2>
-      {errorMessage && (
+      {errors.length > 0 && (
         <div
           className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
           role="alert"
         >
           <strong className="font-bold">Error:</strong>
-          <span className="block sm:inline"> {errorMessage}</span>
+          <ul className="list-disc list-inside">
+            {errors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
         </div>
       )}
 

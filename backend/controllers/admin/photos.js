@@ -92,3 +92,31 @@ exports.destroy = async (req, res) => {
   });
   res.json("photo deleted");
 };
+
+// create a new photo
+// exports.carica = async (req, res) => {
+//   const data = req.body;
+//   data.slug = kebabCase(data.title);
+//   const filePath = req.file.path;
+//   console.log(filePath);
+
+//   const newPhoto = await prisma.photo.create({
+//     data: {
+//       title: data.title,
+//       slug: data.slug,
+//       src: req.file.src,
+//       description: data.description,
+//       visible: Boolean(data.visible),
+//       userId: Number(req.user.id),
+//       categories: {
+//         connect: data.categories.map((category) => ({ id: Number(category) })),
+//       },
+//     },
+//     include: {
+//       categories: true,
+//       user: true,
+//     },
+//   });
+//   res.json(newPhoto);
+//   console.log(req.file);
+// };

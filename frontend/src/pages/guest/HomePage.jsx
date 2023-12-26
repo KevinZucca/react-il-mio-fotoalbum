@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function HomePage() {
   const { photosList } = usePhotos();
   const [hoverEl, setHoverEl] = useState(null);
+  // const baseURL = import.meta.env.VITE_BASE_API_URL;
 
   return (
     <>
@@ -24,7 +25,11 @@ export default function HomePage() {
               index == 3 || index == 6 ? "col-span-2" : ""
             } `}
             style={{
-              backgroundImage: `url('${el.src}')`,
+              backgroundImage: `url(${el.src})`,
+              // backgroundImage: `url(${baseURL.replace(
+              //   /\\/g,
+              //   "/"
+              // )}/${el.src.replace(/\\/g, "/")})`,
             }}
             onMouseEnter={() => setHoverEl(index)}
             onMouseLeave={() => setHoverEl(null)}

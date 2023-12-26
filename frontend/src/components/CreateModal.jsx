@@ -55,7 +55,7 @@ export default function CreatePhotoModal({ isOpen, onClose, onCreate }) {
     });
   }
 
-  async function handleDeleteSubmit(e) {
+  async function handleCreateSubmit(e) {
     e.preventDefault();
     onCreate(formData);
   }
@@ -69,7 +69,7 @@ export default function CreatePhotoModal({ isOpen, onClose, onCreate }) {
           <div className="bg-white p-6 rounded-md w-96 h-full justify-center flex flex-col transform translate-x-0">
             <h2 className="text-2xl font-bold mb-4">Create New Photo</h2>
             {/* Form */}
-            <form onSubmit={handleDeleteSubmit}>
+            <form onSubmit={handleCreateSubmit}>
               {/* TITLE */}
               <div className="mb-4">
                 <label className="block text-sm font-bold mb-2" htmlFor="title">
@@ -118,6 +118,21 @@ export default function CreatePhotoModal({ isOpen, onClose, onCreate }) {
                 />
               </div>
 
+              {/* src file */}
+              {/* <div className="mb-4">
+                <label className="block text-sm font-bold mb-2" htmlFor="src">
+                  File
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="src"
+                  name="src"
+                  type="file"
+                  placeholder="URL of image"
+                  // value={formData.src}
+                  onChange={(e) => handleInput(e.target.files[0], "src")}
+                />
+              </div> */}
               {/* PUBLISHED */}
               <div className="flex justify-center gap-3 items-center my-5">
                 <span>Do you wanto to make it public?</span>

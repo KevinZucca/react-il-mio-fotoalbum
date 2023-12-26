@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { sendRequest } from "../../utils/FetchAPI";
+// const baseURL = import.meta.env.VITE_BASE_API_URL;
 
 export default function PhotoDetail() {
   const [photo, setPhoto] = useState({});
@@ -26,7 +27,12 @@ export default function PhotoDetail() {
       <div className="w-3/5 max-h-[1000px] m-auto flex flex-col items-center">
         {/* img */}
         <div className="max-h-[800px]">
-          <img src={photo.src} alt="" className="max-h-[800px]" />
+          <img
+            // src={`${baseURL}/${photo.src}`}
+            src={photo.src}
+            alt=""
+            className="max-h-[800px]"
+          />
         </div>
 
         {/* content */}
